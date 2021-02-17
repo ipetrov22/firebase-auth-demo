@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { register } from '../../services/userService';
 import './Register.scss';
 
 const Register = () => {
@@ -15,7 +16,7 @@ const Register = () => {
         e.preventDefault();
 
         if (formData.email !== '' && formData.password !== '') {
-            console.log('SUBMIT');
+            register(formData);
         }
     }
 
