@@ -4,17 +4,10 @@ import firebase from '../firebase';
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(localStorage.getItem('idTkn'));
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
-        const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-            if (user) {
-                user.getIdToken()
-                    .then((tkn) => localStorage.setItem('idTkn', tkn))
-                    .catch((err) => console.log(err));
-            } else {
-                localStorage.removeItem('idTkn');
-            }
+        const unsubscribe = firebase.auth().onIdTokenChanged((user) => {
             setUser(user);
         });
 
