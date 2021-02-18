@@ -7,6 +7,9 @@ const requests = {
             },
             body: JSON.stringify(data),
         })
+    },
+    get: (url) => {
+        return fetch(url);
     }
 };
 

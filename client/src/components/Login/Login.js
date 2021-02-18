@@ -18,7 +18,10 @@ const Login = () => {
 
         if (formData.email !== '' && formData.password !== '') {
             login(formData.email, formData.password)
-                .then(res => {
+                .then((res) => {
+                    res.user.getIdToken()
+                        .then(tkn => localStorage.setItem('idTkn', tkn))
+                        .catch(err => console.log(err));
                     history.push('/');
                 })
                 .catch(err => alert(err.message));
