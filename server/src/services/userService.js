@@ -8,7 +8,10 @@ const register = ({ email, password }) => {
     })
         .then(async (userRecord) => {
             const user = new UserModel({ email });
+            const _id = user._id;
             await user.save();
+
+            admin.auth().setCustomUserClaims(userRecord.uid, { _id });
 
             return userRecord;
         })
