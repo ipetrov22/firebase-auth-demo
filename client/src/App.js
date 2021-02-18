@@ -1,13 +1,16 @@
-import './App.css';
 import AppRouter from './AppRouter';
 import Header from './components/Header';
+import { AuthProvider } from './contexts/Auth';
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <AppRouter />
-    </div>
+    <AuthProvider>
+      <div className="App">
+        <Header />
+        <AppRouter />
+      </div>
+    </AuthProvider>
   );
 }
 
