@@ -39,10 +39,10 @@ const Register = () => {
             Register
             <form className="register-form" onSubmit={submitForm}>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" onChange={handleChange} value={formData.email} />
+                <input type="email" name="email" onChange={handleChange} />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" onChange={handleChange} value={formData.password} />
+                <input type="password" name="password" onChange={handleChange}/>
 
                 <button type="submit">Register</button>
             </form>
