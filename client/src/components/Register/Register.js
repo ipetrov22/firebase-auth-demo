@@ -21,10 +21,15 @@ const Register = () => {
             register(formData)
                 .then(res => res.json())
                 .then(data => {
+                    if (data.error) {
+                        throw data.error;
+                    }
                     console.log(data);
                     history.push('/login');
                 })
-                .catch(err => console.log(err));
+                .catch(err => {
+                    alert(err);
+                });
 
         }
     }

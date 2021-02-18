@@ -1,21 +1,20 @@
 const admin = require('../config/firebase');
 const UserModel = require('../models/UserModel');
 
-const register = async ({ email, password }) => {
-    try {
-        const user = new UserModel({ email });
-        await user.save();
-        const uid = user._id.toString();
+const register = ({ email, password }) => {
+    return admin.auth().createUser({
+        email,
+        password
+    })
+        .then(async (userRecord) => {
+            const user = new UserModel({ email });
+            await user.save();
 
-        const firebaseUserRecord = await admin.auth().createUser({
-            uid,
-            email,
-            password
+            return userRecord;
+        })
+        .catch((error) => {
+            return { error: error.message };
         });
-        return firebaseUserRecord;
-    } catch (error) {
-        console.log(error);
-    }
 }
 
 module.exports = {

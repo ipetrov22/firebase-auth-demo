@@ -3,8 +3,8 @@ const router = Router();
 const { userService } = require('../services');
 
 router.post('/register', async (req, res) => {
-    const userRecord = await userService.register(req.body);
-    res.json(userRecord);
+    const result = await userService.register(req.body);
+    return res.json(result);
 });
 
 module.exports = router;
