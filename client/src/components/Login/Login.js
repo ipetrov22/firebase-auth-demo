@@ -19,7 +19,6 @@ const Login = () => {
         if (formData.email !== '' && formData.password !== '') {
             login(formData.email, formData.password)
                 .then(res => {
-                    console.log(res);
                     history.push('/');
                 })
                 .catch(err => alert(err.message));
