@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import { register } from '../../services/userService';
 import './Register.scss';
 
 const Register = () => {
+    const history = useHistory();
     const [formData, setFormData] = useState({ email: '', password: '' });
 
     const handleChange = (e) => {
@@ -16,7 +18,14 @@ const Register = () => {
         e.preventDefault();
 
         if (formData.email !== '' && formData.password !== '') {
-            register(formData);
+            register(formData)
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data);
+                    history.push('/login');
+                })
+                .catch(err => console.log(err));
+
         }
     }
 
@@ -25,10 +34,10 @@ const Register = () => {
             Register
             <form className="register-form" onSubmit={submitForm}>
                 <label htmlFor="email">Email</label>
-                <input type="email" name="email" onChange={handleChange} />
+                <input type="email" name="email" onChange={handleChange} value={formData.email} />
 
                 <label htmlFor="password">Password</label>
-                <input type="password" name="password" onChange={handleChange} />
+                <input type="password" name="password" onChange={handleChange} value={formData.password} />
 
                 <button type="submit">Register</button>
             </form>
